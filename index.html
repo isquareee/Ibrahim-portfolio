@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibrahim Ismail Aminu - Backend Developer Portfolio</title>
+    
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8vVbl8P0yEWAU+TLW29jM7JjY0TqKk9F2pXn4/pXgI2wDk5C2C65Xv8h4Xv2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Variables */
+        :root {
+            --bs-body-bg: #0f172a; /* Darker than default dark for a deep feel */
+            --bs-body-color: #f8fafc;
+            --bs-primary: #6366f1; /* Indigo-500 */
+            --bs-primary-rgb: 99, 102, 241;
+            --bs-secondary: #475569; /* Slate-600 */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            scroll-behavior: smooth;
+            /* Added padding-top to ensure content is not hidden by the fixed top navbar */
+            padding-top: 70px; 
+            overflow-x: hidden; 
+        }
+
+        .section-bg {
+            background-color: rgba(30, 41, 59, 0.5); /* Slate-800 with transparency */
+            border: 1px solid rgba(79, 70, 229, 0.3); /* Indigo-600 border */
+            backdrop-filter: blur(8px);
+        }
+
+        /* Gradient for Hero Name */
+        .hero-title {
+            background: linear-gradient(to right, #818cf8, #fff); /* Indigo to white */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom style for the active navigation item */
+        .nav-link-custom {
+            color: #c7d2fe; /* Indigo-300 */
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link-custom:hover {
+            color: #fff;
+            background-color: rgba(99, 102, 241, 0.2);
+        }
+        
+        .active-nav {
+            background-color: #6366f1 !important; /* Indigo-500 */
+            color: #0f172a !important; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 9999px; /* Ensure rounded corners */
+        }
+
+        .skill-badge-tech {
+            background-color: rgba(79, 70, 229, 0.7); /* Indigo-600 transparent */
+        }
+        .skill-badge-soft {
+            background-color: rgba(71, 85, 105, 0.7); /* Slate-600 transparent */
+        }
+    </style>
+</head>
+
+<body data-bs-theme="dark" data-bs-spy="scroll" data-bs-target="#main-nav">
+
+    <!-- Configuration/Data -->
+    <script>
+        const BACKEND_URL = 'http://127.0.0.1:8000/contact'; 
+
+        const projectsData = [
+            {
+                title: "Project Alpha (Placeholder)",
+                description: "A highly scalable web service designed for real-time data processing. Utilized asynchronous tasks for improved concurrency.",
+                tech: ["FastAPI", "PostgreSQL", "Docker"],
+                github: "#",
+                demo: "#",
+            },
+            {
+                title: "Project Beta (Placeholder)",
+                description: "Built a robust user authentication and authorization module, securing access across microservices using OAuth2.",
+                tech: ["Python", "OAuth2", "Redis"],
+                github: "#",
+                demo: "#",
+            }
+        ];
+    </script>
+
+    <!-- Navigation (Fixed Top Header with Logo and Tooltip) -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow-lg" id="main-nav">
+        <div class="container-fluid">
+            
+            <!-- Logo/Profile with Tooltip -->
+            <!-- The 'title' attribute and data-bs-* attributes enable the Bootstrap Tooltip -->
+            <a class="navbar-brand d-flex align-items-center me-auto" href="#hero"
+               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ibrahim Ismail Aminu" id="profile-logo">
+                <img 
+                    src="https://placehold.co/40x40/1F7A8C/FFFFFF?text=IA" 
+                    alt="Profile" 
+                    class="rounded-circle border border-2 border-primary"
+                    style="width: 40px; height: 40px; object-fit: cover;"
+                >
+            </a>
+
+            <!-- Hamburger Toggler (Mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links (Collapsible) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2 mt-3 mt-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom active active-nav p-2 px-3" href="#hero">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom p-2 px-3" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom p-2 px-3" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom p-2 px-3" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom p-2 px-3" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5 pt-5">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="vh-100 d-flex align-items-center text-center">
+            <div class="container">
+                <img 
+                    src="https://placehold.co/150x150/1F7A8C/FFFFFF?text=IA" 
+                    alt="Profile" 
+                    class="img-fluid rounded-circle mb-4 border border-4 border-primary shadow-lg"
+                    style="width: 150px; height: 150px; object-fit: cover;"
+                >
+                <h1 class="display-1 fw-bolder mb-3 hero-title">
+                    Ibrahim Ismail Aminu
+                </h1>
+                <p class="display-6 text-primary mb-4 fw-light">
+                    Backend Developer
+                </p>
+                <p class="lead text-light mb-5 mx-auto" style="max-width: 700px;">
+                    I build modern web applications with Python and FastAPI, focusing on performance and clean architecture.
+                </p>
+
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="https://github.com/isquareee" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="GitHub">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                    <a href="https://x.com/ibrahimismail60" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="Twitter">
+                        <i class="fab fa-twitter fa-2x"></i>
+                    </a>
+                    <a href="https://wa.me/2349086374832" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="WhatsApp">
+                        <i class="fab fa-whatsapp fa-2x"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="LinkedIn">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5">
+            <h2 class="display-4 fw-bold text-center mb-5 pt-5">
+                <i class="fa-solid fa-user text-primary me-3"></i>About Me
+            </h2>
+            <div class="mx-auto section-bg p-5 rounded-4 shadow-lg" style="max-width: 800px;">
+                <p class="lead">
+                    I am a dedicated **Backend Developer** with a passion for building robust and efficient backend systems. My expertise lies in leveraging the speed and versatility of **Python** with the modern asynchronous capabilities of **FastAPI**.
+                </p>
+                <p class="lead">
+                    My focus is always on creating clean, maintainable, and highly performant APIs that power dynamic web applications. I thrive on solving complex technical challenges and integrating services like **PostgreSQL** and various message queues to ensure data integrity and scalability.
+                </p>
+                <p class="lead mb-0">
+                    When I'm not coding, I prioritize continuous learning and contributing to team success through strong **Teamwork** and **Communication**.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-5">
+            <h2 class="display-4 fw-bold text-center mb-5 pt-5">
+                <i class="fa-solid fa-code text-primary me-3"></i>Skills
+            </h2>
+            <div class="row g-4 mx-auto" style="max-width: 1000px;">
+                <!-- Technical Skills -->
+                <div class="col-md-6">
+                    <div class="p-4 section-bg rounded-4 shadow-lg h-100">
+                        <h3 class="h5 fw-bold text-primary mb-4">Technical Expertise</h3>
+                        <div class="d-flex flex-wrap gap-3">
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">Python</span>
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">FastAPI</span>
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">HTML</span>
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">CSS</span>
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">JavaScript</span>
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">Git</span>
+                            <span class="badge skill-badge-tech rounded-pill text-white p-3 shadow">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="col-md-6">
+                    <div class="p-4 section-bg rounded-4 shadow-lg h-100">
+                        <h3 class="h5 fw-bold text-primary mb-4">Soft Skills</h3>
+                        <div class="d-flex flex-wrap gap-3">
+                            <span class="badge skill-badge-soft rounded-pill text-light p-3 shadow">Teamwork</span>
+                            <span class="badge skill-badge-soft rounded-pill text-light p-3 shadow">Problem-solving</span>
+                            <span class="badge skill-badge-soft rounded-pill text-light p-3 shadow">Good Communication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-5">
+            <h2 class="display-4 fw-bold text-center mb-5 pt-5">
+                <i class="fa-solid fa-briefcase text-primary me-3"></i>Featured Projects
+            </h2>
+            <div class="row g-4 mx-auto" id="projects-container" style="max-width: 1000px;">
+                <!-- Projects will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 pb-5">
+            <h2 class="display-4 fw-bold text-center mb-5 pt-5">
+                <i class="fa-solid fa-envelope text-primary me-3"></i>Get in Touch
+            </h2>
+            <div class="row g-4 mx-auto" style="max-width: 1000px;">
+                
+                <!-- Contact Form -->
+                <div class="col-md-6">
+                    <div class="p-4 section-bg rounded-4 shadow-lg h-100">
+                        <h3 class="h4 fw-bold text-light mb-4 d-flex align-items-center">
+                            <i class="fa-solid fa-comment-dots text-primary me-3"></i>Send Me a Message
+                        </h3>
+                        <form id="contact-form" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <input type="text" class="form-control bg-dark text-light border-secondary" id="name" name="name" placeholder="Your Name" required>
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control bg-dark text-light border-secondary" id="email" name="email" placeholder="Your Email" required>
+                                <div class="invalid-feedback">Please enter a valid email.</div>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control bg-dark text-light border-secondary" id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+                                <div class="invalid-feedback">Please enter your message.</div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100" id="submit-btn">
+                                Send Message
+                            </button>
+                            <div id="status-message" class="mt-3 text-center"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="col-md-6">
+                    <div class="p-4 section-bg rounded-4 shadow-lg h-100">
+                        <h3 class="h4 fw-bold text-light mb-4">Contact Details</h3>
+                        
+                        <p class="text-light">
+                            <i class="fa-solid fa-at text-primary me-3"></i>
+                            <span class="fw-semibold">Email:</span>
+                            <a href="mailto:ibrahimisml60@gmail.com" class="text-decoration-none text-info ms-2">ibrahimisml60@gmail.com</a>
+                        </p>
+
+                        <p class="text-light">
+                            <i class="fa-solid fa-mobile-alt text-primary me-3"></i>
+                            <span class="fw-semibold">WhatsApp:</span>
+                            <a href="https://wa.me/2349086374832" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-info ms-2">+2349086374832</a>
+                        </p>
+
+                        <h4 class="h5 fw-bold text-primary pt-4 mb-3">Connect with me:</h4>
+                        <div class="d-flex gap-4">
+                            <a href="https://github.com/isquareee" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="GitHub">
+                                <i class="fab fa-github fa-2x"></i>
+                            </a>
+                            <a href="https://x.com/ibrahimismail60" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="Twitter">
+                                <i class="fab fa-twitter fa-2x"></i>
+                            </a>
+                            <a href="https://wa.me/2349086374832" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="WhatsApp">
+                                <i class="fab fa-whatsapp fa-2x"></i>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-secondary hover-primary transition-color" title="LinkedIn">
+                                <i class="fab fa-linkedin fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-100 text-center py-4 bg-dark border-top border-secondary">
+        <p class="text-muted mb-0">
+            &copy; <span id="current-year"></span> Ibrahim Ismail Aminu.
+        </p>
+    </footer>
+
+    <!-- Bootstrap JS CDN (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Dynamic Content, Form Handling, and Tooltip Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. Initialize Tooltips ---
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // --- 2. Dynamic Projects Rendering ---
+            const projectsContainer = document.getElementById('projects-container');
+            if (projectsData.length === 0) {
+                projectsContainer.innerHTML = `
+                    <div class="col-12 text-center p-5 border border-dashed border-primary rounded-4 text-muted">
+                        <p class="h5">No projects added yet.</p>
+                        <p class="mt-2">Provide your project details, and they will appear here!</p>
+                    </div>
+                `;
+            } else {
+                projectsData.forEach(project => {
+                    const techBadges = project.tech.map(tech => `
+                        <span class="badge bg-primary bg-opacity-50 text-light p-2">${tech}</span>
+                    `).join('');
+
+                    const projectCard = `
+                        <div class="col-md-6">
+                            <div class="p-4 section-bg rounded-4 shadow-lg h-100 transition">
+                                <h3 class="h4 fw-bold text-light mb-2">${project.title}</h3>
+                                <p class="text-secondary">${project.description}</p>
+                                
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    ${techBadges}
+                                </div>
+
+                                <div class="d-flex gap-3">
+                                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-info hover-primary transition-color">
+                                        <i class="fab fa-github me-1"></i> GitHub
+                                    </a>
+                                    ${project.demo !== '#' ? `
+                                    <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-info hover-primary transition-color">
+                                        <i class="fa-solid fa-bolt me-1"></i> Live Demo
+                                    </a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    projectsContainer.innerHTML += projectCard;
+                });
+            }
+
+            // --- 3. Contact Form Submission Logic (Connects to FastAPI Backend) ---
+            const contactForm = document.getElementById('contact-form');
+            const statusMessage = document.getElementById('status-message');
+            const submitBtn = document.getElementById('submit-btn');
+            const BACKEND_URL = 'http://127.0.0.1:8000/contact'; 
+
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                if (!contactForm.checkValidity()) {
+                    contactForm.classList.add('was-validated');
+                    return;
+                }
+                
+                contactForm.classList.remove('was-validated');
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('message').value,
+                };
+
+                // Helper to display status
+                const setStatus = (msg, isError = false) => {
+                    statusMessage.className = 'mt-3 text-center';
+                    statusMessage.innerHTML = msg;
+                    statusMessage.classList.add(isError ? 'text-danger' : 'text-success');
+                };
+
+                // Show sending status
+                setStatus('<i class="fa-solid fa-spinner fa-spin me-2"></i> Sending message...', false);
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch(BACKEND_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                    });
+
+                    if (response.ok) {
+                        setStatus('🎉 Message sent successfully!', false);
+                        contactForm.reset();
+                    } else {
+                        // Attempt to read error message from response body
+                        let errorText = 'Failed to send. Server error.';
+                        try {
+                            const errorData = await response.json();
+                            errorText = errorData.detail || errorText;
+                        } catch {
+                            // ignore if not json
+                        }
+                        setStatus(`❌ Failed to send: ${errorText}`, true);
+                    }
+                } catch (error) {
+                    console.error("Contact form submission error:", error);
+                    setStatus('❌ Connection error. Check backend server.', true);
+                } finally {
+                    submitBtn.disabled = false;
+                    setTimeout(() => statusMessage.textContent = '', 5000);
+                }
+            });
+            
+            // --- 4. Active Navigation Link Indicator (Scroll Observer) ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link-custom');
+
+            const options = {
+                root: null,
+                threshold: 0.5,
+                // Offset the viewport check by the height of the fixed navbar
+                rootMargin: "-60px 0px -50% 0px", 
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            link.classList.remove('active');
+                        });
+                        const activeLink = document.querySelector(`.nav-link-custom[href="#${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav');
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
